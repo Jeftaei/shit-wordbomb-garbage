@@ -1,4 +1,5 @@
 import win32gui
+# win32gui comes with the win32api module i think
 import time
 import random
 _random = random.SystemRandom()
@@ -9,7 +10,7 @@ import keyboard
 def search_prompt(prompt):
     with open(f'dict/nohyphen.txt', 'r') as f:
         words = f.readlines()
-    return _random.sample(words, 1)[0]
+    return _random.sample(words, 1)
 
 class WindowMgr:
 
