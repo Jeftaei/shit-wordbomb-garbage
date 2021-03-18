@@ -6,12 +6,18 @@ _random = random.SystemRandom()
 import tkinter as tk
 import keyboard
 
-
 def search_prompt(prompt):
-    with open(f'dict/nohyphen.txt', 'r') as f:
+    with open(f"dict/nohyphen.txt", "r") as f:
         words = f.readlines()
-    v = _random.sample(words, 1)
-    return v
+    real = [i.replace('\n', '') for i in words if prompt.lower() in i.lower()]
+    solvesFound = len(real)
+    if solvesFound <= 4:
+        cap = solvesFound
+        num = 0
+    else:
+        cap = 4
+        num = _random.randint(0, solvesFound-4)
+    return real[num:num+cap]
 
 class WindowMgr:
 
@@ -39,15 +45,18 @@ def getActiveWindow():
 
 def find():
     prompt = entry.get()
-    x = _random.sample(search_prompt(str(prompt)), 1)
+    x = search_prompt(str(prompt))
+    print(x)
     return x
 
 def solve():
     makeRobloxActiveWindow()
     word = find()[0]
+    print(word)
     for i in word:
+        time.sleep(.075)
         keyboard.press_and_release(f'{i}')
-        time.sleep(.05)
+    time.sleep(.1)
     keyboard.press_and_release('enter')
     entry.delete(0, tk.END)
     makeSolverActiveWindow()
