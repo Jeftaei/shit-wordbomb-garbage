@@ -11,7 +11,6 @@ def search_prompt(prompt):
     with open(f'dict/nohyphen.txt', 'r') as f:
         words = f.readlines()
     v = _random.sample(words, 1)
-    print(v)
     return v
 
 class WindowMgr:
@@ -41,13 +40,11 @@ def getActiveWindow():
 def find():
     prompt = entry.get()
     x = _random.sample(search_prompt(str(prompt)), 1)
-    print(x)
     return x
 
 def solve():
     makeRobloxActiveWindow()
     word = find()[0]
-    print(word)
     for i in word:
         keyboard.press_and_release(f'{i}')
         time.sleep(.05)
