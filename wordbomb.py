@@ -46,16 +46,16 @@ def getActiveWindow():
 def find():
     prompt = entry.get()
     x = search_prompt(str(prompt))
-    print(x)
+    # print(x)
     return x
 
 def solve():
     makeRobloxActiveWindow()
     word = find()[0]
-    print(word)
+    # print(word)
     for i in word:
         time.sleep(.075)
-        keyboard.press_and_release(f'{i}')
+        keyboard.press_and_release(f'{i.lower()}')
     time.sleep(.1)
     keyboard.press_and_release('enter')
     entry.delete(0, tk.END)
